@@ -24,7 +24,7 @@ export default function Home() {
       <ProductDescription></ProductDescription>
       <OrderDetails></OrderDetails>
       <OrderHistory></OrderHistory>
-      <Dashboard></Dashboard>
+
       <TopCategories></TopCategories>
       <HeroBanner></HeroBanner>
       <AccountSettings></AccountSettings>
