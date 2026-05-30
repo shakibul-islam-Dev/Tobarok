@@ -56,50 +56,6 @@ const Dashboard = () => {
     <div className="w-full bg-white font-sans text-black py-12 px-4 md:px-[10%]">
       <div className="max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* LEFT SIDE: Navigation Sidebar (3 Columns) */}
-        <div className="lg:col-span-3 border border-gray-100 rounded-lg p-4 bg-white shadow-2xs">
-          <h2 className="text-xl font-semibold px-4 mb-5 tracking-wide text-gray-900">
-            Navigation
-          </h2>
-          <nav className="flex flex-col gap-1">
-            {/* Dashboard Active Item */}
-            <a
-              href="#"
-              className="flex items-center gap-3 px-4 py-3 bg-[#edf2ee] text-gray-900 font-medium rounded-md border-l-4 border-[#00b207] text-sm"
-            >
-              <LayoutDashboard className="w-4 h-4 text-gray-700" /> Dashboard
-            </a>
-            <Link
-              href={`/dashboard/orderhistory`}
-              className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-md text-sm transition-colors"
-            >
-              <RefreshCw className="w-4 h-4" /> Order History
-            </Link>
-            <Link
-              href={`/dashboard/wishlist`}
-              className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-md text-sm transition-colors"
-            >
-              <Heart className="w-4 h-4" /> Wishlist
-            </Link>
-            <Link
-              href={`/dashboard/shoppingcarts`}
-              className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-md text-sm transition-colors"
-            >
-              <ShoppingBag className="w-4 h-4" /> Shopping Cart
-            </Link>
-            <a
-              href="#"
-              className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-md text-sm transition-colors"
-            >
-              <Settings className="w-4 h-4" /> Settings
-            </a>
-            <a
-              href="#"
-              className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md text-sm transition-colors mt-2"
-            >
-              <LogOut className="w-4 h-4" /> Log-out
-            </a>
-          </nav>
-        </div>
 
         {/* RIGHT SIDE: Profile Info & Order History (9 Columns) */}
         <div className="lg:col-span-9 flex flex-col gap-6">

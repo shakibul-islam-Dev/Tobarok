@@ -14,5 +14,10 @@ import HeroBanner from "./Components/Banner/HeroBanner";
 import AccountSettings from "./Components/AccountSettings/AccountSettings";
 
 export default function Home() {
-  return <div></div>;
+  return (
+    <div>
+      {" "}
+      <h1>This is home</h1>
+    </div>
+  );
 }
