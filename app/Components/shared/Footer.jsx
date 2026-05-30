@@ -21,8 +21,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full bg-black text-white font-sans border-t border-zinc-900">
-      {/* Main Footer Content */}
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-[5%] pt-16 pb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-start">
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-[5%] pt-16 pb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6 items-start">
         {/* Column 1: Exclusive & Subscribe */}
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-bold tracking-wide text-neutral-50">
@@ -36,7 +35,7 @@ const Footer = () => {
           {/* Email Input Box */}
           <form
             onSubmit={handleSubscribe}
-            className="flex items-center border border-zinc-700 focus-within:border-violet-500 rounded px-3 py-2 mt-1 w-full max-w-[240px] transition-colors"
+            className="flex items-center border border-zinc-700 focus-within:border-violet-500 rounded px-3 py-2 mt-1 w-full max-w-[240px] sm:max-w-full lg:max-w-[240px] transition-colors"
           >
             <input
               type="email"

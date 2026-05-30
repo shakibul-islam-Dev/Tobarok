@@ -13,7 +13,6 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // প্রি-রেন্ডারিং বা SSR-এর সময় ক্লায়েন্ট ও সার্ভার ডেটা ম্যাচ করার জন্য
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -29,10 +28,9 @@ const Navbar = () => {
     { name: "SignUp", path: "/signup" },
   ];
 
-  // Hydration Error প্রতিরোধ করতে মাউন্ট হওয়ার আগে একটি কঙ্কাল (Skeleton/Fallback) রেন্ডার করবে
   if (!mounted) {
     return (
-      <nav className="w-full bg-white border-b border-gray-200 px-4 md:px-[10%] py-4 flex items-center justify-between font-sans h-20">
+      <nav className="w-full bg-white border-b border-gray-200 px-4 md:px-[5%] lg:px-[10%] py-4 flex items-center justify-between font-sans h-20">
         <div className="text-2xl font-bold text-black tracking-wide">
           Tobarok
         </div>
@@ -42,11 +40,12 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="w-full bg-white border-b border-gray-200 px-4 md:px-[10%] py-4 flex items-center justify-between font-sans relative z-50">
-      {/* Brand Logo & Mobile Menu Toggle */}
-      <div className="flex items-center gap-4">
+    <nav className="w-full bg-white border-b border-gray-200 px-4 sm:px-6 md:px-[5%] lg:px-[10%] py-4 flex items-center justify-between font-sans relative z-50">
+      {/* Brand Logo & Burger Button */}
+      {/* md:hidden দিয়েছি যাতে ট্যাবলেট ও মোবাইলে হ্যামবার্গার মেনু সচল থাকে */}
+      <div className="flex items-center gap-2 sm:gap-4">
         <button
-          className="block md:hidden text-black focus:outline-none"
+          className="block md:hidden text-black focus:outline-none p-1"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle Menu"
         >
@@ -56,13 +55,17 @@ const Navbar = () => {
             <Menu className="w-6 h-6" />
           )}
         </button>
-        <Link href="/" className="text-2xl font-bold text-black tracking-wide">
+        <Link
+          href="/"
+          className="text-xl sm:text-2xl font-bold text-black tracking-wide"
+        >
           Tobarok
         </Link>
       </div>
 
-      {/* Desktop Navigation Links */}
-      <div className="hidden md:flex items-center gap-8 text-base text-black">
+      {/* Navigation Links - Desktop & Tablet Wide */}
+      {/* md ব্রেকপয়েন্ট থেকে লিংকগুলো দৃশ্যমান হবে এবং গ্যাপ এডজাস্ট হবে */}
+      <div className="hidden md:flex items-center gap-5 lg:gap-8 text-base text-black">
         {navlinks.map((link) => (
           <motion.div
             key={link.path}
@@ -71,7 +74,7 @@ const Navbar = () => {
           >
             <Link
               href={link.path}
-              className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
+              className="text-xs lg:text-sm font-medium text-neutral-600 hover:text-violet-500 transition-colors"
             >
               {link.name}
             </Link>
@@ -79,42 +82,43 @@ const Navbar = () => {
         ))}
       </div>
 
-      {/* Right Side Actions */}
-      <div className="flex items-center gap-3 md:gap-5">
-        {/* Search Bar (Desktop) */}
-        <div className="hidden sm:block">
+      {/* Right Side Actions (Icons & Search) */}
+      <div className="flex items-center gap-2 sm:gap-4 lg:gap-5">
+        {/* Search Bar - Hidden only on small mobile screen, visible on Tablet & Desktop */}
+        <div className="hidden xs:block sm:block">
           <SearchBar />
         </div>
 
-        <div className="text-sm font-medium hidden sm:block cursor-pointer hover:text-violet-500 transition-colors">
+        {/* Rewards - Hidden on Mobile, Visible on Tablet & Desktop */}
+        <div className="text-xs lg:text-sm font-medium hidden md:block cursor-pointer hover:text-violet-500 transition-colors">
           Rewards
         </div>
 
         {/* Wishlist Icon */}
         <Link
           href="/wishlist"
-          className="text-black hover:text-violet-500 transition-colors"
+          className="text-black hover:text-violet-500 transition-colors p-1"
         >
-          <Heart className="w-5 h-5 md:w-6 md:h-6" />
+          <Heart className="w-5 h-5 lg:w-6 lg:h-6" />
         </Link>
 
-        {/* Cart Icon with Badge */}
+        {/* Cart Icon */}
         <Link
           href="/cart"
-          className="text-black relative hover:text-violet-500 transition-colors"
+          className="text-black relative hover:text-violet-500 transition-colors p-1"
         >
-          <ShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
-          <span className="absolute -top-1.5 -right-1.5 bg-[#db4444] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+          <ShoppingCart className="w-5 h-5 lg:w-6 lg:h-6" />
+          <span className="absolute top-0 right-0 bg-[#db4444] text-white text-[9px] lg:text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full transform translate-x-1/3 -translate-y-1/3">
             2
           </span>
         </Link>
 
-        {/* Profile Dropdown / Login Icon */}
-        <div className="flex items-center">
+        {/* Profile / User Icon */}
+        <div className="flex items-center pl-1">
           {isLoggedIn ? (
             <Dropdown>
               <Dropdown.Trigger className="rounded-full cursor-pointer">
-                <Avatar size="sm" className="w-8 h-8 md:w-10 md:h-10">
+                <Avatar size="sm" className="w-8 h-8 lg:w-10 lg:h-10">
                   <Avatar.Image
                     alt="User Avatar"
                     src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg"
@@ -189,14 +193,14 @@ const Navbar = () => {
             </Dropdown>
           ) : (
             <User
-              className="w-5 h-5 md:w-6 md:h-6 cursor-pointer"
+              className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-black hover:text-violet-500 transition-colors"
               onClick={() => setIsLoggedIn(true)}
             />
           )}
         </div>
       </div>
 
-      {/* Mobile Responsive Menu Overlay */}
+      {/* Mobile & Tablet Dropdown Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -204,10 +208,10 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 w-full bg-white border-b border-gray-200 p-4 flex flex-col gap-4 md:hidden shadow-lg"
+            className="absolute top-full left-0 w-full bg-white border-b border-gray-200 p-5 flex flex-col gap-4 md:hidden shadow-lg"
           >
-            {/* Search Bar inside Mobile Menu */}
-            <div className="block sm:hidden w-full">
+            {/* Search Bar - Mobile Screen Dropdown Only */}
+            <div className="block xs:hidden w-full">
               <SearchBar />
             </div>
 
@@ -221,7 +225,8 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <div className="text-base font-medium text-neutral-600 sm:hidden py-2">
+
+            <div className="text-base font-medium text-neutral-600 md:hidden py-2">
               Rewards
             </div>
           </motion.div>

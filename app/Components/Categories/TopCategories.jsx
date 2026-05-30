@@ -1,113 +1,104 @@
 "use client";
-import React, { useState } from "react";
 
-const TopCategories = () => {
-  // ক্যাটাগরি ডেটা লিস্ট
+import React, { useState, useEffect, useRef } from "react";
+
+const TopCategories = ({ onCategoryChange }) => {
   const categories = [
-    {
-      id: 1,
-      name: "Fresh Fruit",
-      image: "https://i.ibb.co/6Y94gD0/fresh-fruit.png",
-    },
-    {
-      id: 2,
-      name: "Fresh Vegetables",
-      image: "https://i.ibb.co/M93S0p5/fresh-vegetables.png",
-    },
-    {
-      id: 3,
-      name: "Meat & Fish",
-      image: "https://i.ibb.co/qyG0F8S/meat-fish.png",
-    },
-    { id: 4, name: "Snacks", image: "https://i.ibb.co/vXbX8zY/snacks.png" },
-    {
-      id: 5,
-      name: "Beverages",
-      image: "https://i.ibb.co/vQ1Z59F/beverages.png",
-    },
-    {
-      id: 6,
-      name: "Beauty & Health",
-      image: "https://i.ibb.co/Y7XmYg2/beauty-health.png",
-    },
-    {
-      id: 7,
-      name: "Bread & Bakery",
-      image: "https://i.ibb.co/pP9mD0R/bread-bakery.png",
-    },
-    {
-      id: 8,
-      name: "Baking Needs",
-      image: "https://i.ibb.co/L8zXhXb/baking-needs.png",
-    },
-    { id: 9, name: "Cooking", image: "https://i.ibb.co/W2f9X8t/cooking.png" },
-    {
-      id: 10,
-      name: "Diabetic Food",
-      image: "https://i.ibb.co/f49bX6Y/diabetic-food.png",
-    },
-    {
-      id: 11,
-      name: "Dish Detergents",
-      image: "https://i.ibb.co/mSRp3H4/dish-detergents.png",
-    },
-    { id: 12, name: "Oil", image: "https://i.ibb.co/r2F9w6p/oil.png" },
+    { id: "all", name: "All Categories" },
+    { id: "fresh-fruit", name: "Fresh Fruit" },
+    { id: "fresh-vegetables", name: "Fresh Vegetables" },
+    { id: "meat-fish", name: "Meat & Fish" },
+    { id: "snacks", name: "Snacks" },
+    { id: "beverages", name: "Beverages" },
+    { id: "beauty-health", name: "Beauty & Health" },
+    { id: "bread-bakery", name: "Bread & Bakery" },
   ];
 
-  // ছবির মতো 'Fresh Vegetables' ক্যাটাগরিটি বাই-ডিফল্ট একটি আলাদা বর্ডার কালার (Active State) দেখাবে
-  const [activeCategory, setActiveCategory] = useState(2);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [mounted, setMounted] = useState(false);
+
+  // স্ক্রোল পজিশন ট্র্যাক করার জন্য কন্টেইনার রেফারেন্স
+  const scrollContainerRef = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleCategoryClick = (id, e) => {
+    setActiveCategory(id);
+    if (onCategoryChange) {
+      onCategoryChange(id);
+    }
+
+    // মোবাইলে যে ক্যাটাগরিতে ক্লিক করা হবে, সেটি অটোমেটিক টেনে স্ক্রিনের মাঝখানে চলে আসবে
+    if (e && e.currentTarget && scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const element = e.currentTarget;
+
+      const containerWidth = container.offsetWidth;
+      const elementOffsetLeft = element.offsetLeft;
+      const elementWidth = element.offsetWidth;
+
+      // সেন্টারিং ক্যালকুলেশন
+      const scrollPosition =
+        elementOffsetLeft - containerWidth / 2 + elementWidth / 2;
+
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth", // স্মুথ অ্যানিমেশন হবে
+      });
+    }
+  };
+
+  if (!mounted) {
+    return (
+      <div className="w-full h-10 bg-gray-100 animate-pulse rounded-full my-4" />
+    );
+  }
 
   return (
-    <section className="w-full bg-white font-sans text-black py-12 px-4 md:px-[10%]">
+    <div className="w-full bg-white py-3 sm:py-5 px-4 md:px-[5%] lg:px-[10%] select-none">
       <div className="max-w-[1320px] mx-auto">
-        {/* Top Header / Subtitle */}
-        <div className="text-center mb-8">
-          <span className="text-[#00b207] text-xs font-semibold uppercase tracking-wider block mb-2">
-            Category
-          </span>
-          <h2 className="text-3xl font-bold text-[#1a1a1a]">
-            Shop by Top Categories
-          </h2>
-        </div>
+        {/* - overflow-x-auto: মোবাইলে হাত দিয়ে ডানে-বামে ড্র্যাগ বা স্ক্রোল করার মেইন প্রোপার্টি।
+          - active:scale-95: মোবাইলে টাচ করলে সুন্দর একটা প্রেসড (Pressed) ইফেক্ট হবে।
+          - gap-2 sm:gap-3: টাচ টার্গেট সহজ করার জন্য পারফেক্ট স্পেসিং।
+        */}
+        <div
+          ref={scrollContainerRef}
+          className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-3 touch-pan-x scroll-smooth md:flex-wrap md:justify-center"
+          style={{
+            scrollbarWidth: "none", // Firefox-এ স্ক্রোলবার হাইড করার জন্য
+            WebkitOverflowScrolling: "touch", // iOS/Safari-তে মাখনের মতো স্মুথ স্ক্রোলের জন্য
+          }}
+        >
+          {/* Chrome/Safari-তে স্ক্রোলবার লুকানোর ইনলাইন স্টাইল */}
+          <style jsx global>{`
+            div::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
 
-        {/* Grid Layout (6 Columns on large screens, responsive for mobile) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`bg-white border rounded-lg p-4 flex flex-col items-center justify-between text-center cursor-pointer transition-all duration-300 min-h-[190px] group
-                ${
-                  activeCategory === category.id
-                    ? "border-[#00b207] shadow-[0_4px_15px_rgba(0,178,7,0.1)]"
-                    : "border-gray-200 hover:border-[#00b207] hover:shadow-[0_4px_15px_rgba(0,178,7,0.1)]"
-                }`}
-            >
-              {/* Product Image Container */}
-              <div className="w-full flex-1 flex items-center justify-center p-2">
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="max-h-[95px] max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
+          {categories.map((category) => {
+            const isActive = activeCategory === category.id;
 
-              {/* Category Name */}
-              <h3
-                className={`text-sm font-medium mt-3 transition-colors duration-300
+            return (
+              <button
+                key={category.id}
+                onClick={(e) => handleCategoryClick(category.id, e)}
+                className={`whitespace-nowrap px-4 py-2 text-xs sm:text-sm font-medium rounded-full border transition-all duration-200 active:scale-95 shrink-0 cursor-pointer
                   ${
-                    activeCategory === category.id || category.id === 2
-                      ? "text-[#2c742f]"
-                      : "text-gray-800 group-hover:text-[#2c742f]"
+                    isActive
+                      ? "bg-[#00b207] text-white border-[#00b207] shadow-2xs font-semibold"
+                      : "bg-gray-50 text-gray-700 border-gray-200 hover:border-[#00b207] hover:text-[#00b207]"
                   }`}
               >
                 {category.name}
-              </h3>
-            </div>
-          ))}
+              </button>
+            );
+          })}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
