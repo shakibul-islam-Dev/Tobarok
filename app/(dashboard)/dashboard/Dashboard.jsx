@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
 
+import React from "react";
 import {
   LayoutDashboard,
   RefreshCw,
@@ -9,6 +9,7 @@ import {
   Settings,
   LogOut,
 } from "lucide-react";
+import Link from "next/link";
 
 const Dashboard = () => {
   // অর্ডার হিস্ট্রি ডাটা লিস্ট
@@ -68,7 +69,7 @@ const Dashboard = () => {
               <LayoutDashboard className="w-4 h-4 text-gray-700" /> Dashboard
             </a>
             <Link
-              href={`/dashboard/wishlist/page.js`}
+              href={`/dashboard/orderhistory`}
               className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-md text-sm transition-colors"
             >
               <RefreshCw className="w-4 h-4" /> Order History
@@ -79,12 +80,12 @@ const Dashboard = () => {
             >
               <Heart className="w-4 h-4" /> Wishlist
             </Link>
-            <a
-              href="#"
+            <Link
+              href={`/dashboard/shoppingcarts`}
               className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-md text-sm transition-colors"
             >
               <ShoppingBag className="w-4 h-4" /> Shopping Cart
-            </a>
+            </Link>
             <a
               href="#"
               className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-md text-sm transition-colors"

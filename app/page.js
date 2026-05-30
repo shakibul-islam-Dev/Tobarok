@@ -14,20 +14,5 @@ import HeroBanner from "./Components/Banner/HeroBanner";
 import AccountSettings from "./Components/AccountSettings/AccountSettings";
 
 export default function Home() {
-  return (
-    <div>
-      <Wishlist></Wishlist>
-      <Testimonial></Testimonial>
-      <ProductCard></ProductCard>
-      <ShoppingCart></ShoppingCart>
-      {/* <ProductQuickView></ProductQuickView> */}
-      <ProductDescription></ProductDescription>
-      <OrderDetails></OrderDetails>
-      <OrderHistory></OrderHistory>
-
-      <TopCategories></TopCategories>
-      <HeroBanner></HeroBanner>
-      <AccountSettings></AccountSettings>
-    </div>
-  );
+  return <div></div>;
 }
