@@ -3,27 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image"; // Next.js Image ইমপোর্ট করা হলো
+import Image from "next/image";
 
 const ShoppingCart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Green Capsicum",
-      price: 14.0,
-      quantity: 5,
-      image:
-        "https://images.unsplash.com/photo-1628773822503-930a85890060?q=80&w=200&auto=format&fit=crop",
-    },
-    {
-      id: 2,
-      name: "Red Capsicum",
-      price: 14.0,
-      quantity: 1,
-      image:
-        "https://images.unsplash.com/photo-1563565312871-70bf8f090710?q=80&w=200&auto=format&fit=crop",
-    },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
 
   const [mounted, setMounted] = useState(false);
 

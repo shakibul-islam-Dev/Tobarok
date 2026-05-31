@@ -1,7 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import { Play } from "lucide-react";
+import { fetchProducts } from '@/lib/dataService';
 
+export default async function Page() {
+  // সব ডাটা আনার জন্য
+  const products = await fetchProducts(); 
+
+  return (
+    <div>
+      {products.map(product => (
+        <div key={product.productId}>
+          <h2>{product.productTitle}</h2>
+          <img src={product.image} alt={product.productTitle} />
+        </div>
+      ))}
+    </div>
+  );
+}
 const ProductDescription = () => {
   // ট্যাব স্টেট ম্যানেজমেন্ট
   const [activeTab, setActiveTab] = useState("Descriptions");

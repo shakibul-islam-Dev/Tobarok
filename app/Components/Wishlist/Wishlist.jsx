@@ -69,9 +69,6 @@ const Wishlist = () => {
         <div className="w-full border border-gray-200 rounded-lg overflow-hidden shadow-xs">
           {wishlistItems.length > 0 ? (
             <>
-              {/* ------------------------------------------------------------- */}
-              {/* DESKTOP & TABLET VIEW (Visible on md screens and above)       */}
-              {/* ------------------------------------------------------------- */}
               <div className="hidden md:block">
                 {/* Table Header Wrapper */}
                 <div className="grid grid-cols-12 bg-gray-50 border-b border-gray-200 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-gray-400">

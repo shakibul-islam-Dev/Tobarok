@@ -25,7 +25,7 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
-    { name: "SignUp", path: "/signup" },
+    { name: "SignIn", path: "/signin" },
   ];
 
   if (!mounted) {

@@ -107,12 +107,6 @@ const ProductCards = () => {
 
   return (
     <div className="w-full bg-white py-6 md:py-10 px-4">
-      {/* GRID LOGIC:
-        - grid-cols-2: মোবাইলে ২টি কার্ড পাশাপাশি
-        - sm:grid-cols-3: ট্যাবলেটে ৩টি
-        - md:grid-cols-4: ছোট ল্যাপটপে ৪টি
-        - xl:grid-cols-5: ডেক্সটপে ৫টি
-      */}
       <div className="max-w-[1320px] mx-auto grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5 md:gap-6">
         {dummyProducts.map((product) => (
           <ProductCard
