@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
 
-// Swiper এর অফিশিয়াল স্টাইল শিট ইমপোর্ট
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -18,7 +17,6 @@ const HeroSlider = () => {
     setMounted(true);
   }, []);
 
-  // Unsplash থেকে ক্রপড ও অপ্টিমাইজড ইমেজের ডাইনামিক ডেটা অ্যারে
   const slides = [
     {
       id: 1,

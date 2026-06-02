@@ -1,7 +1,4 @@
-import { Button } from "@heroui/react";
-
 import TopCategories from "./Components/Categories/TopCategories";
-
 import HeroSlider from "./Components/Banner/HeroBanner";
 import ProductCards from "./Components/ProductCards";
 import ProductDetail from "./productDetails/ProductDetail";
